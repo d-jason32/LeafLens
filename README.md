@@ -2,7 +2,7 @@
   <img src="/images/mainAppLogo.png" />
 </p>
 
-<h1 align="center"><b>Open Hand</b></h1>
+<h1 align="center"><b>LeafLens</b></h1>
 
 
 <div align="center">
@@ -19,7 +19,7 @@
 
 
 <p align="center">
-  A full-stack web and mobile app for learning ASL!
+  A full-stack mobile app for learning about plants!
 </p>
 
 <div align="center">
