@@ -63,9 +63,8 @@ import android.app.Activity
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.lint.kotlin.metadata.Visibility
-
-
-
+import com.google.firebase.Firebase
+import com.google.firebase.auth.auth
 
 
 @RequiresApi(Build.VERSION_CODES.UPSIDE_DOWN_CAKE)
@@ -76,6 +75,8 @@ fun Login(nav: NavHostController, modifier: Modifier = Modifier) {
     var email by remember { mutableStateOf("")}
     var password by remember { mutableStateOf("")}
     var visible by remember { mutableStateOf(false) }
+    val auth = Firebase.auth
+
     val activity = context as Activity
     val scope = rememberCoroutineScope()
 
@@ -218,13 +219,18 @@ fun Login(nav: NavHostController, modifier: Modifier = Modifier) {
                             Toast.makeText(context, "Please enter a valid email", Toast.LENGTH_SHORT).show()
                         }
                         else {
+                            auth.signInWithEmailAndPassword(email, password)
+                                .addOnCompleteListener { task ->
+                                    if (task.isSuccessful) {
 
-                            nav.navigate("home") {
-                                popUpTo("intro") { inclusive = true }
-
-
+                                        nav.navigate("home") {
+                                            popUpTo("intro") { inclusive = true }
+                                        }
+                                    } else {
+                                        val msg = task.exception?.localizedMessage ?: "Authentication failed."
+                                        Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
+                                    }
                                 }
-
                         }
                     }
                 ) {

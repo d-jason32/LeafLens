@@ -18,19 +18,29 @@ import androidx.compose.material3.Surface
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.google.firebase.Firebase
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.auth
 
 // Main activity for the application
 // The main activity for the app will start off at the splash screen
 class MainActivity : ComponentActivity() {
+    private lateinit var auth: FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        auth = Firebase.auth
+        val currentUser = auth.currentUser
+        val startDestination = "home"
+        SoundManager.init(this)
+
         setContent {
             Android_Development_CapstoneTheme {
-                MyApp(modifier = Modifier.fillMaxSize())
+                MyApp(modifier = Modifier.fillMaxSize(), startDestination = startDestination)
 
             }
         }
     }
+
 }
 
 
@@ -54,14 +64,14 @@ fun OnboardingPreview() {
 @Composable
 fun MyAppPreview() {
     Android_Development_CapstoneTheme {
-        MyApp(Modifier.fillMaxSize())
+        MyApp(Modifier.fillMaxSize(), startDestination = "onboarding")
     }
 }
 
 
 // Main app function to allow for navigation
 @Composable
-fun MyApp(modifier: Modifier = Modifier) {
+fun MyApp(modifier: Modifier = Modifier, startDestination: String) {
     // Needed to create a navigation controller
     val nav = rememberNavController()
 
@@ -69,7 +79,7 @@ fun MyApp(modifier: Modifier = Modifier) {
         NavHost(
             navController = nav,
             // makes the app start at the login screen
-            startDestination = "splashscreen"
+            startDestination = startDestination
             //startDestination = "home"
         ) {
             composable("onboarding") {
@@ -110,6 +120,10 @@ fun MyApp(modifier: Modifier = Modifier) {
 
             // route for the home page
             composable("home") { Home(nav) }
+
+            composable("game") { Game(nav) }
+
+
 
 
 

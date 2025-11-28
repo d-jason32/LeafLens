@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "445224936684",
+    "project_id": "leaflens-7671a",
+    "storage_bucket": "leaflens-7671a.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:445224936684:android:059a4b696302125016f1c9",
+        "android_client_info": {
+          "package_name": "com.example.android_development_capstone"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDlJv7zxonf9WsrLAy1r-xhzc4CFp36Po0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

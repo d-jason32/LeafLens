@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Android_Development_Capstone"
+rootProject.name = "LeafLens"
 include(":app")
  

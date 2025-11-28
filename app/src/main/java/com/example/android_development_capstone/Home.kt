@@ -56,10 +56,13 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.google.firebase.Firebase
+import com.google.firebase.auth.auth
 
 
 @Composable
@@ -81,10 +84,31 @@ fun Home(nav: NavHostController, modifier: Modifier = Modifier) {
             Column(
                 modifier = Modifier
                     .fillMaxSize(),
-                verticalArrangement = Arrangement.Top,
+                verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
 
+                Text("Welcome back!",
+                    fontWeight = FontWeight.Bold,
+                    style = TextStyle(
+                        fontSize = 48.sp
+                    ),
+                    color = MaterialTheme.colorScheme.onTertiary,
+                    modifier = Modifier.padding(top = 26.dp)
+                )
+
+                val username = Firebase.auth.currentUser?.displayName ?: "User"
+                Text(
+                    text = username,
+                    fontWeight = FontWeight.Medium,
+                    style = TextStyle(
+                        fontSize = 40.sp
+                    ),
+                    color = MaterialTheme.colorScheme.onBackground,
+                    modifier = Modifier.padding(top = 8.dp)
+                )
+
+                PlantPicture()
 
 
 

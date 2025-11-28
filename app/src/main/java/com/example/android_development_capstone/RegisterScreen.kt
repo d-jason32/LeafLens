@@ -49,6 +49,9 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import com.google.firebase.Firebase
+import com.google.firebase.auth.auth
+import com.google.firebase.auth.userProfileChangeRequest
 
 @Composable
 fun RegisterScreen(nav: NavHostController) {
@@ -59,10 +62,11 @@ fun RegisterScreen(nav: NavHostController) {
     var password by remember { mutableStateOf("") }
     var visible2 by remember { mutableStateOf(false) }
     var isParent by remember { mutableStateOf(false) }
+    val auth = Firebase.auth
 
 
     Surface(
-        color = MaterialTheme.colorScheme.background,
+        color = MaterialTheme.colorScheme.tertiary,
         modifier = Modifier.fillMaxSize()
     ) {
 
@@ -90,7 +94,7 @@ fun RegisterScreen(nav: NavHostController) {
                     style = TextStyle(
                         fontSize = 48.sp
                     ),
-                    color = Color(0xFFFFFFFF),
+                    color = MaterialTheme.colorScheme.onTertiary,
                     modifier = Modifier.padding(top = 26.dp)
                 )
 
@@ -231,11 +235,11 @@ fun RegisterScreen(nav: NavHostController) {
                     shape = RoundedCornerShape(25.dp),
                     modifier = Modifier.fillMaxWidth()
                         .height(56.dp),
-                    border = BorderStroke(2.dp, Color(0xFFFFFFFF)),
+                    border = BorderStroke(2.dp, MaterialTheme.colorScheme.primary),
 
                     colors = ButtonDefaults.buttonColors(
-                        containerColor = Color(0xFFFFFFFF),
-                        contentColor = Color(0xFF000000)
+                        containerColor = MaterialTheme.colorScheme.primary,
+                        contentColor = MaterialTheme.colorScheme.onPrimary
                     ),
                     onClick = {
                         if (email.isBlank() || password.isBlank() || username.isBlank()) {
@@ -259,17 +263,42 @@ fun RegisterScreen(nav: NavHostController) {
                             )
                                 .show()
                         } else {
-
-                                        nav.navigate("login") {
-                                            popUpTo("register") { inclusive = true }
-
-                            }
+                            auth.createUserWithEmailAndPassword(email, password)
+                                .addOnCompleteListener { task ->
+                                    if (task.isSuccessful) {
+                                        val user = auth.currentUser
+                                        val profileUpdates = userProfileChangeRequest {
+                                            displayName = username
+                                        }
+                                        user?.updateProfile(profileUpdates)
+                                            ?.addOnCompleteListener { profileTask ->
+                                                if (profileTask.isSuccessful) {
+                                                    nav.navigate("home") {
+                                                        popUpTo("register") { inclusive = true }
+                                                    }
+                                                } else {
+                                                    Toast.makeText(
+                                                        context,
+                                                        "Profile update failed",
+                                                        Toast.LENGTH_SHORT
+                                                    ).show()
+                                                }
+                                            }
+                                    } else {
+                                        Toast.makeText(
+                                            context,
+                                            task.exception?.localizedMessage ?: "Registration failed",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                    }
+                                }
                         }
                     }
                 ) {
                     Text(
                         "Sign up",
-                        fontSize = 16.sp
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight.Bold
                     )
                 }
 
