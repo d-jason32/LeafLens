@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="/images/leaflense.png" />
+  <img src="/images/Lo.png" />
 </p>
 
 <h1 align="center"><b>LeafLens</b></h1>
@@ -22,15 +22,15 @@
 
 <div align="center">
 
-![GitHub repo size](https://img.shields.io/github/repo-size/SandalCodez/CSC490_Capstone)
-![GitHub stars](https://img.shields.io/github/stars/SandalCodez/CSC490_Capstone)
-![GitHub issues](https://img.shields.io/github/issues/SandalCodez/CSC490_Capstone)
-![GitHub pull requests](https://img.shields.io/github/issues-pr/SandalCodez/CSC490_Capstone)
-![GitHub last commit](https://img.shields.io/github/last-commit/SandalCodez/CSC490_Capstone)
+![GitHub repo size](https://img.shields.io/github/repo-size/d-jason32/LeafLens)
+![GitHub stars](https://img.shields.io/github/stars/d-jason32/LeafLens)
+![GitHub issues](https://img.shields.io/github/issues/d-jason32/LeafLens)
+![GitHub pull requests](https://img.shields.io/github/d-jason32/LeafLens)
+![GitHub last commit](https://img.shields.io/github/d-jason32/LeafLens)
 
-![GitHub top language](https://img.shields.io/github/languages/top/SandalCodez/CSC490_Capstone)
-![Languages count](https://img.shields.io/github/languages/count/SandalCodez/CSC490_Capstone)
-![License](https://img.shields.io/github/license/SandalCodez/CSC490_Capstone)
+![GitHub top language](https://img.shields.io/github/languages/top/d-jason32/LeafLens)
+![Languages count](https://img.shields.io/github/languages/count/d-jason32/LeafLens)
+![License](https://img.shields.io/github/license/d-jason32/LeafLens)
 </div>
 
 
