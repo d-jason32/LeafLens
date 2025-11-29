@@ -27,29 +27,20 @@
 ![GitHub issues](https://img.shields.io/github/issues/d-jason32/LeafLens)
 ![GitHub pull requests](https://img.shields.io/github/d-jason32/LeafLens)
 ![GitHub last commit](https://img.shields.io/github/d-jason32/LeafLens)
-
-![GitHub top language](https://img.shields.io/github/languages/top/d-jason32/LeafLens)
-![Languages count](https://img.shields.io/github/languages/count/d-jason32/LeafLens)
 ![License](https://img.shields.io/github/license/d-jason32/LeafLens)
 </div>
 
 
-### Insert a demo gif
 
 ## 📚 Table of Contents
 - [💬 Introduction](#-introduction)
 - [🚀 Features](#-features)
 - [▶️ Demo](#-demo)
 - [🧰 Tech Stack](#-tech-stack)
-- [🧠 How it Works](#-how-it-works)
 - [🛠️ Installation](#-installation)
 - [🧪 Usage](#-usage)
-- [⚙️ Configuration](#-configuration)
-- [📁 Project Structure](#-project-structure)
-- [📝 License](#-license)
 - [❓FAQ](#faq)
 - [📄 Documentation](#documentation)
-- [👥 Contributors](#-contributors)
 - [🙏 Acknowledgments](#-acknowledgments)
 
 ## 💬 Introduction
@@ -61,16 +52,12 @@
 
 ## 🧰 Tech Stack
 
-## 🧠 How it Works
-
 
 ## 🛠️ Installation
-
 
 ## 🧪 Usage
 
 ## 📁 Project Structure
-
 
 ## ❓FAQ
 
