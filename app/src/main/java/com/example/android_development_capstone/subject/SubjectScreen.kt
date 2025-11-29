@@ -44,6 +44,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -145,7 +147,8 @@ fun SubjectGrid(
          val cardColors = listOf(
             MaterialTheme.colorScheme.primary,
             MaterialTheme.colorScheme.secondary,
-            MaterialTheme.colorScheme.tertiary
+            MaterialTheme.colorScheme.tertiary,
+             MaterialTheme.colorScheme.primaryContainer,
          )
          val selectedCardColor = cardColors[subject.title.length % cardColors.size]
          
@@ -182,7 +185,9 @@ fun SubjectGrid(
          ) {
             Box(
                contentAlignment = Alignment.Center,
-               modifier = Modifier.fillMaxSize()
+               modifier = Modifier
+                  .fillMaxSize()
+                  .padding(12.dp)
             ) {
                if (selectedSubjects.contains(subject)) {
                   Icon(
@@ -191,14 +196,18 @@ fun SubjectGrid(
                      tint = MaterialTheme.colorScheme.onPrimary,
                      modifier = Modifier
                         .align(Alignment.TopEnd)
-                        .padding(8.dp)
+                        .padding(4.dp)
                   )
                }
                Text(
                   text = subject.title,
                   color = MaterialTheme.colorScheme.onPrimary,
-                  style = MaterialTheme.typography.titleLarge,
-                  fontWeight = FontWeight.Bold
+                  style = MaterialTheme.typography.titleMedium,
+                  fontWeight = FontWeight.Bold,
+                  textAlign = TextAlign.Center,
+                  maxLines = 2,
+                  overflow = TextOverflow.Ellipsis,
+                  modifier = Modifier.fillMaxWidth()
                )
             }
          }
