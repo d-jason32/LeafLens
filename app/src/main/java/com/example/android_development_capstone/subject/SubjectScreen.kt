@@ -56,267 +56,267 @@ import com.example.android_development_capstone.data.Subject
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SubjectScreen(
-   modifier: Modifier = Modifier,
-   navController: NavHostController? = null,
-   viewModel: SubjectViewModel = viewModel(
-      factory = SubjectViewModel.Factory
-   ),
-   onSubjectClick: (Subject) -> Unit = {}
+    modifier: Modifier = Modifier,
+    navController: NavHostController? = null,
+    viewModel: SubjectViewModel = viewModel(
+        factory = SubjectViewModel.Factory
+    ),
+    onSubjectClick: (Subject) -> Unit = {}
 ) {
-   val uiState = viewModel.uiState.collectAsStateWithLifecycle()
+    val uiState = viewModel.uiState.collectAsStateWithLifecycle()
 
-   if (uiState.value.isSubjectDialogVisible) {
-      AddSubjectDialog(
-         onConfirmation = { title ->
-            viewModel.hideSubjectDialog()
-            viewModel.addSubject(title)
-         },
-         onDismissRequest = {
-            viewModel.hideSubjectDialog()
-         }
-      )
-   }
-
-   Scaffold(
-      containerColor = MaterialTheme.colorScheme.background,
-      topBar = {
-         if (uiState.value.isCabVisible) {
-            CabAppBar(
-               onDeleteClick = { viewModel.deleteSelectedSubjects() },
-               onUpClick = { viewModel.hideCab() }
-            )
-         } else {
-            TopAppBar(
-               title = { 
-                  Text(
-                     "Subjects",
-                     color = MaterialTheme.colorScheme.onBackground,
-                     style = MaterialTheme.typography.headlineMedium
-                  ) 
-               },
-               colors = androidx.compose.material3.TopAppBarDefaults.topAppBarColors(
-                  containerColor = MaterialTheme.colorScheme.background
-               )
-            )
-         }
-      },
-      bottomBar = {
-         navController?.let { BottomNavBar(it) }
-      },
-      floatingActionButton = {
-         if (!uiState.value.isCabVisible) {
-            FloatingActionButton(
-               onClick = { viewModel.showSubjectDialog() },
-               containerColor = MaterialTheme.colorScheme.primary,
-               contentColor = MaterialTheme.colorScheme.onPrimary
-            ) {
-               Icon(Icons.Filled.Add, "Add")
+    if (uiState.value.isSubjectDialogVisible) {
+        AddSubjectDialog(
+            onConfirmation = { title ->
+                viewModel.hideSubjectDialog()
+                viewModel.addSubject(title)
+            },
+            onDismissRequest = {
+                viewModel.hideSubjectDialog()
             }
-         }
-      }
-   ) { innerPadding ->
-      SubjectGrid(
-         subjectList = uiState.value.subjectList,
-         inSelectionMode = uiState.value.isCabVisible,
-         selectedSubjects = uiState.value.selectedSubjects,
-         onSubjectClick = onSubjectClick,
-         onSelectSubject = { viewModel.selectSubject(it) },
-         modifier = modifier.padding(innerPadding)
-      )
-   }
+        )
+    }
+
+    Scaffold(
+        containerColor = MaterialTheme.colorScheme.background,
+        topBar = {
+            if (uiState.value.isCabVisible) {
+                CabAppBar(
+                    onDeleteClick = { viewModel.deleteSelectedSubjects() },
+                    onUpClick = { viewModel.hideCab() }
+                )
+            } else {
+                TopAppBar(
+                    title = {
+                        Text(
+                            "Subjects",
+                            color = MaterialTheme.colorScheme.onBackground,
+                            style = MaterialTheme.typography.headlineMedium
+                        )
+                    },
+                    colors = androidx.compose.material3.TopAppBarDefaults.topAppBarColors(
+                        containerColor = MaterialTheme.colorScheme.background
+                    )
+                )
+            }
+        },
+        bottomBar = {
+            navController?.let { BottomNavBar(it) }
+        },
+        floatingActionButton = {
+            if (!uiState.value.isCabVisible) {
+                FloatingActionButton(
+                    onClick = { viewModel.showSubjectDialog() },
+                    containerColor = MaterialTheme.colorScheme.primary,
+                    contentColor = MaterialTheme.colorScheme.onPrimary
+                ) {
+                    Icon(Icons.Filled.Add, "Add")
+                }
+            }
+        }
+    ) { innerPadding ->
+        SubjectGrid(
+            subjectList = uiState.value.subjectList,
+            inSelectionMode = uiState.value.isCabVisible,
+            selectedSubjects = uiState.value.selectedSubjects,
+            onSubjectClick = onSubjectClick,
+            onSelectSubject = { viewModel.selectSubject(it) },
+            modifier = modifier.padding(innerPadding)
+        )
+    }
 }
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun SubjectGrid(
-   subjectList: List<Subject>,
-   onSubjectClick: (Subject) -> Unit,
-   modifier: Modifier = Modifier,
-   onSelectSubject: (Subject) -> Unit = { },
-   inSelectionMode: Boolean = false,
-   selectedSubjects: Set<Subject> = emptySet()
+    subjectList: List<Subject>,
+    onSubjectClick: (Subject) -> Unit,
+    modifier: Modifier = Modifier,
+    onSelectSubject: (Subject) -> Unit = { },
+    inSelectionMode: Boolean = false,
+    selectedSubjects: Set<Subject> = emptySet()
 ) {
-   val haptics = LocalHapticFeedback.current
+    val haptics = LocalHapticFeedback.current
 
-   LazyVerticalGrid(
-      columns = GridCells.Adaptive(minSize = 128.dp),
-      contentPadding = PaddingValues(0.dp),
-      modifier = modifier
-   ) {
-      items(subjectList, key = { it.id }) { subject ->
-         val cardColors = listOf(
-            MaterialTheme.colorScheme.primary,
-            MaterialTheme.colorScheme.secondary,
-            MaterialTheme.colorScheme.tertiary,
-             MaterialTheme.colorScheme.primaryContainer,
-         )
-         val selectedCardColor = cardColors[subject.title.length % cardColors.size]
-         
-         Card(
-            colors = CardDefaults.cardColors(
-               containerColor = if (selectedSubjects.contains(subject)) {
-                  selectedCardColor.copy(alpha = 0.7f)
-               } else {
-                  selectedCardColor
-               }
-            ),
-            modifier = Modifier
-               .animateItem()
-               .height(120.dp)
-               .padding(8.dp)
-               .combinedClickable(
-                  onLongClick = {
-                     haptics.performHapticFeedback(HapticFeedbackType.LongPress)
-                     onSelectSubject(subject)
-                  },
-                  onClick = {
-                     if (inSelectionMode) {
-                        onSelectSubject(subject)
-                     } else {
-                        onSubjectClick(subject)
-                     }
-                  },
-                  onClickLabel = subject.title,
-                  onLongClickLabel = "Select for deleting"
-               ),
-            elevation = CardDefaults.cardElevation(
-               defaultElevation = 4.dp
+    LazyVerticalGrid(
+        columns = GridCells.Adaptive(minSize = 128.dp),
+        contentPadding = PaddingValues(0.dp),
+        modifier = modifier
+    ) {
+        items(subjectList, key = { it.id }) { subject ->
+            val cardColors = listOf(
+                MaterialTheme.colorScheme.primary,
+                MaterialTheme.colorScheme.secondary,
+                MaterialTheme.colorScheme.tertiary,
+                MaterialTheme.colorScheme.primaryContainer,
             )
-         ) {
-            Box(
-               contentAlignment = Alignment.Center,
-               modifier = Modifier
-                  .fillMaxSize()
-                  .padding(12.dp)
+            val selectedCardColor = cardColors[subject.title.length % cardColors.size]
+
+            Card(
+                colors = CardDefaults.cardColors(
+                    containerColor = if (selectedSubjects.contains(subject)) {
+                        selectedCardColor.copy(alpha = 0.7f)
+                    } else {
+                        selectedCardColor
+                    }
+                ),
+                modifier = Modifier
+                    .animateItem()
+                    .height(120.dp)
+                    .padding(8.dp)
+                    .combinedClickable(
+                        onLongClick = {
+                            haptics.performHapticFeedback(HapticFeedbackType.LongPress)
+                            onSelectSubject(subject)
+                        },
+                        onClick = {
+                            if (inSelectionMode) {
+                                onSelectSubject(subject)
+                            } else {
+                                onSubjectClick(subject)
+                            }
+                        },
+                        onClickLabel = subject.title,
+                        onLongClickLabel = "Select for deleting"
+                    ),
+                elevation = CardDefaults.cardElevation(
+                    defaultElevation = 4.dp
+                )
             ) {
-               if (selectedSubjects.contains(subject)) {
-                  Icon(
-                     imageVector = Icons.Default.CheckCircle,
-                     contentDescription = "Check",
-                     tint = MaterialTheme.colorScheme.onPrimary,
-                     modifier = Modifier
-                        .align(Alignment.TopEnd)
-                        .padding(4.dp)
-                  )
-               }
-               Text(
-                  text = subject.title,
-                  color = MaterialTheme.colorScheme.onPrimary,
-                  style = MaterialTheme.typography.titleMedium,
-                  fontWeight = FontWeight.Bold,
-                  textAlign = TextAlign.Center,
-                  maxLines = 2,
-                  overflow = TextOverflow.Ellipsis,
-                  modifier = Modifier.fillMaxWidth()
-               )
+                Box(
+                    contentAlignment = Alignment.Center,
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(12.dp)
+                ) {
+                    if (selectedSubjects.contains(subject)) {
+                        Icon(
+                            imageVector = Icons.Default.CheckCircle,
+                            contentDescription = "Check",
+                            tint = MaterialTheme.colorScheme.onPrimary,
+                            modifier = Modifier
+                                .align(Alignment.TopEnd)
+                                .padding(4.dp)
+                        )
+                    }
+                    Text(
+                        text = subject.title,
+                        color = MaterialTheme.colorScheme.onPrimary,
+                        style = MaterialTheme.typography.titleMedium,
+                        fontWeight = FontWeight.Bold,
+                        textAlign = TextAlign.Center,
+                        maxLines = 2,
+                        overflow = TextOverflow.Ellipsis,
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                }
             }
-         }
-      }
-   }
+        }
+    }
 }
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CabAppBar(
-   onDeleteClick: () -> Unit,
-   onUpClick: () -> Unit,
-   modifier: Modifier = Modifier
+    onDeleteClick: () -> Unit,
+    onUpClick: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
-   TopAppBar(
-      title = { 
-         Text(
-            "Select Subjects",
-            color = MaterialTheme.colorScheme.onBackground
-         ) 
-      },
-      modifier = modifier,
-      colors = androidx.compose.material3.TopAppBarDefaults.topAppBarColors(
-         containerColor = MaterialTheme.colorScheme.background
-      ),
-      navigationIcon = {
-         IconButton(onClick = onUpClick) {
-            Icon(
-               Icons.AutoMirrored.Filled.ArrowBack, 
-               "Back",
-               tint = MaterialTheme.colorScheme.onBackground
+    TopAppBar(
+        title = {
+            Text(
+                "Select Subjects",
+                color = MaterialTheme.colorScheme.onBackground
             )
-         }
-      },
-      actions = {
-         IconButton(onClick = onDeleteClick) {
-            Icon(
-               Icons.Filled.Delete, 
-               "Delete",
-               tint = MaterialTheme.colorScheme.error
-            )
-         }
-      }
-   )
+        },
+        modifier = modifier,
+        colors = androidx.compose.material3.TopAppBarDefaults.topAppBarColors(
+            containerColor = MaterialTheme.colorScheme.background
+        ),
+        navigationIcon = {
+            IconButton(onClick = onUpClick) {
+                Icon(
+                    Icons.AutoMirrored.Filled.ArrowBack,
+                    "Back",
+                    tint = MaterialTheme.colorScheme.onBackground
+                )
+            }
+        },
+        actions = {
+            IconButton(onClick = onDeleteClick) {
+                Icon(
+                    Icons.Filled.Delete,
+                    "Delete",
+                    tint = MaterialTheme.colorScheme.error
+                )
+            }
+        }
+    )
 }
 
 @Composable
 fun AddSubjectDialog(
-   onConfirmation: (String) -> Unit,
-   onDismissRequest: () -> Unit,
+    onConfirmation: (String) -> Unit,
+    onDismissRequest: () -> Unit,
 ) {
-   var subject by remember { mutableStateOf("") }
+    var subject by remember { mutableStateOf("") }
 
-   AlertDialog(
-      onDismissRequest = {
-         onDismissRequest()
-      },
-      containerColor = MaterialTheme.colorScheme.surface,
-      title = {
-         Text(
-            "Add New Subject",
-            color = MaterialTheme.colorScheme.onSurface,
-            style = MaterialTheme.typography.headlineSmall
-         )
-      },
-      text = {
-         TextField(
-            label = { Text("Subject Name") },
-            value = subject,
-            onValueChange = { subject = it },
-            singleLine = true,
-            colors = androidx.compose.material3.TextFieldDefaults.colors(
-               focusedTextColor = MaterialTheme.colorScheme.onSurface,
-               unfocusedTextColor = MaterialTheme.colorScheme.onSurface,
-               focusedLabelColor = MaterialTheme.colorScheme.primary,
-               unfocusedLabelColor = MaterialTheme.colorScheme.onSurface
-            ),
-            keyboardActions = KeyboardActions(
-               onDone = {
-                  onConfirmation(subject)
-               }
-            ),
-            modifier = Modifier.fillMaxWidth()
-         )
-      },
-      confirmButton = {
-         Button(
-            colors = ButtonDefaults.buttonColors(
-               containerColor = MaterialTheme.colorScheme.primary,
-               contentColor = MaterialTheme.colorScheme.onPrimary
-            ),
-            onClick = {
-               onConfirmation(subject)
-            }) {
-            Text(text = "Add")
-         }
-      },
-      dismissButton = {
-         Button(
-            colors = ButtonDefaults.buttonColors(
-               containerColor = MaterialTheme.colorScheme.surface,
-               contentColor = MaterialTheme.colorScheme.onSurface
-            ),
-            onClick = {
-               onDismissRequest()
-            }) {
-            Text(text = "Cancel")
-         }
-      },
-   )
+    AlertDialog(
+        onDismissRequest = {
+            onDismissRequest()
+        },
+        containerColor = MaterialTheme.colorScheme.surface,
+        title = {
+            Text(
+                "Add New Subject",
+                color = MaterialTheme.colorScheme.onSurface,
+                style = MaterialTheme.typography.headlineSmall
+            )
+        },
+        text = {
+            TextField(
+                label = { Text("Subject Name") },
+                value = subject,
+                onValueChange = { subject = it },
+                singleLine = true,
+                colors = androidx.compose.material3.TextFieldDefaults.colors(
+                    focusedTextColor = MaterialTheme.colorScheme.onSurface,
+                    unfocusedTextColor = MaterialTheme.colorScheme.onSurface,
+                    focusedLabelColor = MaterialTheme.colorScheme.primary,
+                    unfocusedLabelColor = MaterialTheme.colorScheme.onSurface
+                ),
+                keyboardActions = KeyboardActions(
+                    onDone = {
+                        onConfirmation(subject)
+                    }
+                ),
+                modifier = Modifier.fillMaxWidth()
+            )
+        },
+        confirmButton = {
+            Button(
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = MaterialTheme.colorScheme.primary,
+                    contentColor = MaterialTheme.colorScheme.onPrimary
+                ),
+                onClick = {
+                    onConfirmation(subject)
+                }) {
+                Text(text = "Add")
+            }
+        },
+        dismissButton = {
+            Button(
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = MaterialTheme.colorScheme.surface,
+                    contentColor = MaterialTheme.colorScheme.onSurface
+                ),
+                onClick = {
+                    onDismissRequest()
+                }) {
+                Text(text = "Cancel")
+            }
+        },
+    )
 }

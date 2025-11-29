@@ -78,5 +78,7 @@ dependencies {
     
     // Kotlinx Serialization for navigation
     implementation(libs.kotlinx.serialization.json)
+    implementation("androidx.compose.animation:animation:1.7.5")
+
 
 }

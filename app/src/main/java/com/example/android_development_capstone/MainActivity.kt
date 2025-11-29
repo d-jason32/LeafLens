@@ -19,6 +19,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
+import com.example.android_development_capstone.game.Game1
 import com.example.android_development_capstone.subject.SubjectScreen
 import com.example.android_development_capstone.question.QuestionScreen
 import com.example.android_development_capstone.question.AddQuestionScreen
@@ -127,6 +128,9 @@ fun MyApp(modifier: Modifier = Modifier, startDestination: String) {
             composable("home") { Home(nav) }
 
             composable("game") { Game(nav) }
+
+            composable("Game1") { Game1() }
+
 
             composable("subjectscreen") { 
                 SubjectScreen(

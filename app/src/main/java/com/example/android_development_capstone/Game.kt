@@ -81,18 +81,18 @@ fun Game(nav: NavHostController, modifier: Modifier = Modifier) {
                 OutlinedButton(
                     onClick = {
                         //SoundManager.play("click")
-                        nav.navigate("onboarding4")
+                        nav.navigate("Game1")
                     },
                     modifier = Modifier.fillMaxWidth()
                         .padding(horizontal = 20.dp),
                     border = BorderStroke(2.dp, MaterialTheme.colorScheme.onBackground,),
                     colors = ButtonDefaults.buttonColors(
-                        containerColor = MaterialTheme.colorScheme.primary,
+                        containerColor = MaterialTheme.colorScheme.primaryContainer,
                         contentColor = MaterialTheme.colorScheme.onPrimary
                     )
                 ) {
                     Text(
-                        "Beginner",
+                        "Easy",
                         fontSize = 16.sp
                     )
                 }
@@ -106,54 +106,15 @@ fun Game(nav: NavHostController, modifier: Modifier = Modifier) {
                         .padding(horizontal = 20.dp),
                     border = BorderStroke(2.dp, MaterialTheme.colorScheme.onBackground,),
                     colors = ButtonDefaults.buttonColors(
-                        containerColor = MaterialTheme.colorScheme.primary,
+                        containerColor = MaterialTheme.colorScheme.primaryContainer,
                         contentColor = MaterialTheme.colorScheme.onPrimary
                     )
                 ) {
                     Text(
-                        "Intermediate",
+                        "Hard",
                         fontSize = 16.sp
                     )
                 }
-
-                OutlinedButton(
-                    onClick = {
-                        //SoundManager.play("click")
-                        nav.navigate("onboarding4")
-                    },
-                    modifier = Modifier.fillMaxWidth()
-                        .padding(horizontal = 20.dp),
-                    border = BorderStroke(2.dp, MaterialTheme.colorScheme.onBackground,),
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = MaterialTheme.colorScheme.primary,
-                        contentColor = MaterialTheme.colorScheme.onPrimary
-                    )
-                ) {
-                    Text(
-                        "Advanced",
-                        fontSize = 16.sp
-                    )
-                }
-
-                OutlinedButton(
-                    onClick = {
-                        //SoundManager.play("click")
-                        nav.navigate("onboarding4")
-                    },
-                    modifier = Modifier.fillMaxWidth()
-                        .padding(horizontal = 20.dp),
-                    border = BorderStroke(2.dp, MaterialTheme.colorScheme.onBackground,),
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = MaterialTheme.colorScheme.primary,
-                        contentColor = MaterialTheme.colorScheme.onPrimary
-                    )
-                ) {
-                    Text(
-                        "Expert",
-                        fontSize = 16.sp
-                    )
-                }
-
 
 
                 Spacer(Modifier.height(10.dp))
