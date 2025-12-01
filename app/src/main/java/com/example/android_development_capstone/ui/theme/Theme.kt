@@ -18,9 +18,9 @@ val OnPrimary = Color(0xFF1A1A1A)
 val PrimaryContainer = Color(0xFFD4E4F4)
 val OnPrimaryContainer = Color(0xFF1A1A1A)
 
-val Secondary = Color(0xFFB5EAEA)
+val Secondary = Color(0xFFF8DDE7)              // lighter muted pink
 val OnSecondary = Color(0xFF1A1A1A)
-val SecondaryContainer = Color(0xFFDAF5F5)
+val SecondaryContainer = Color(0xFFFFEEF4)     // very soft pastel pink
 val OnSecondaryContainer = Color(0xFF1A1A1A)
 
 val Tertiary = Color(0xFFFFEBA1)
@@ -35,6 +35,9 @@ val Surface = Color(0xFFFFFFFF)
 val OnSurface = Color(0xFF1A1A1A)
 val SurfaceVariant = Color(0xFFE8F4FF)
 val OnSurfaceVariant = Color(0xFF1A1A1A)
+
+
+
 
 
 

@@ -83,7 +83,7 @@ fun Login(nav: NavHostController, modifier: Modifier = Modifier) {
 
 
     Surface(
-        color = MaterialTheme.colorScheme.tertiary,
+        color = MaterialTheme.colorScheme.secondary,  // Pink background from theme
         modifier = Modifier.fillMaxSize()
 
     ) {
@@ -113,7 +113,7 @@ fun Login(nav: NavHostController, modifier: Modifier = Modifier) {
                     style = TextStyle(
                         fontSize = 48.sp
                     ),
-                    color = MaterialTheme.colorScheme.onTertiary,
+                    color = MaterialTheme.colorScheme.onSecondary,
                     modifier = Modifier.padding(top = 26.dp)
                 )
 
@@ -246,7 +246,7 @@ fun Login(nav: NavHostController, modifier: Modifier = Modifier) {
                 Text("Don't have an account? Register",
                     fontSize = 14.sp,
                     fontWeight = FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.onTertiary,
+                    color = MaterialTheme.colorScheme.onSecondary,
                     textDecoration = TextDecoration.Underline,
                     modifier = Modifier.clickable {
                         nav.navigate("register") })
