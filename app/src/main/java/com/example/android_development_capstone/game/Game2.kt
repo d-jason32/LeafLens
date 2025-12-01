@@ -78,9 +78,14 @@ fun Game2(modifier: Modifier = Modifier, onWin: () -> Unit = {}) {
     var plantRow by remember { mutableIntStateOf(0) }  // Start at bottom-right
     var plantCol by remember { mutableIntStateOf(0) }
 
-    // Finish line position (top-left corner)
+    // Finish line position (bottom-left corner)
     val finishRow = 4
     val finishCol = 0
+    
+    // Barrier positions - plant cannot cross these
+    val barriers = listOf(
+        Pair(3, 0)
+    )
 
     // Is the animation running?
     var isRunning by remember { mutableStateOf(false) }
@@ -204,7 +209,7 @@ fun Game2(modifier: Modifier = Modifier, onWin: () -> Unit = {}) {
                     }
                 }
 
-                // Finish line image (top-right corner)
+                // Finish line image
                 Image(
                     painter = painterResource(id = R.drawable.finish),
                     contentDescription = "Finish",
@@ -213,6 +218,18 @@ fun Game2(modifier: Modifier = Modifier, onWin: () -> Unit = {}) {
                         .size(cellSize)
                         .padding(2.dp)
                 )
+                
+                // Barrier images
+                barriers.forEach { (row, col) ->
+                    Image(
+                        painter = painterResource(id = R.drawable.x),
+                        contentDescription = "Barrier",
+                        modifier = Modifier
+                            .offset(x = cellSize * col, y = cellSize * row)
+                            .size(cellSize)
+                            .padding(4.dp)
+                    )
+                }
 
                 // Animated plant position
                 val animatedOffsetX by animateDpAsState(
@@ -318,12 +335,24 @@ fun Game2(modifier: Modifier = Modifier, onWin: () -> Unit = {}) {
                                 isRunning = true
                                 // Execute each command in sequence
                                 for (command in commands) {
-                                    when (command) {
-                                        "left" -> if (plantCol > 0) plantCol--
-                                        "right" -> if (plantCol < 4) plantCol++
-                                        "up" -> if (plantRow > 0) plantRow--
-                                        "down" -> if (plantRow < 4) plantRow++
+                                    // Calculate new position
+                                    val newRow = when (command) {
+                                        "up" -> if (plantRow > 0) plantRow - 1 else plantRow
+                                        "down" -> if (plantRow < 4) plantRow + 1 else plantRow
+                                        else -> plantRow
                                     }
+                                    val newCol = when (command) {
+                                        "left" -> if (plantCol > 0) plantCol - 1 else plantCol
+                                        "right" -> if (plantCol < 4) plantCol + 1 else plantCol
+                                        else -> plantCol
+                                    }
+                                    
+                                    // Only move if not blocked by barrier
+                                    if (!barriers.contains(Pair(newRow, newCol))) {
+                                        plantRow = newRow
+                                        plantCol = newCol
+                                    }
+                                    
                                     delay(500) // Wait for animation
 
                                     // Check if player reached the finish
@@ -340,8 +369,8 @@ fun Game2(modifier: Modifier = Modifier, onWin: () -> Unit = {}) {
 
                     ResetButton(
                         onReset = {
-                            plantRow = 4  // Reset to bottom-right (starting position)
-                            plantCol = 4
+                            plantRow = 0  // Reset to starting position (top-left)
+                            plantCol = 0
                             commands.clear()
                         }
                     )
