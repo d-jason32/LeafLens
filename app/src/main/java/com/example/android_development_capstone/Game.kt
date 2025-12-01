@@ -88,7 +88,7 @@ fun Game(nav: NavHostController, modifier: Modifier = Modifier) {
             OutlinedButton(
                 onClick = {
                     //SoundManager.play("click")
-                    nav.navigate("onboarding4")
+                    nav.navigate("Game4")
                 },
                 modifier = Modifier
                     .fillMaxWidth()
