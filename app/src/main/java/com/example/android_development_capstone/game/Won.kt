@@ -1,7 +1,5 @@
 package com.example.android_development_capstone.game
 
-package com.example.android_development_capstone.game
-
 import android.app.Activity
 import android.content.pm.ActivityInfo
 import androidx.compose.foundation.BorderStroke
@@ -36,8 +34,6 @@ import com.example.android_development_capstone.BottomNavBar
 import com.example.android_development_capstone.NiceJob
 import com.example.android_development_capstone.PlantPicture
 import com.example.android_development_capstone.R
-import com.google.firebase.Firebase
-import com.google.firebase.auth.auth
 
 @Composable
 fun Won(nav: NavHostController, modifier: Modifier = Modifier) {
@@ -72,7 +68,10 @@ fun Won(nav: NavHostController, modifier: Modifier = Modifier) {
 
 
 
-                NiceJob()
+                Image(painter = painterResource(id = R.drawable.won),
+                    contentDescription = null,
+                    Modifier.size(200.dp)
+                )
 
                 Image(painter = painterResource(id = R.drawable.plant),
                     contentDescription = null,
@@ -84,7 +83,7 @@ fun Won(nav: NavHostController, modifier: Modifier = Modifier) {
 
                 OutlinedButton(
                     onClick = {
-                        nav.navigate("Game2")
+                        nav.navigate("home")
                     },
                     modifier = Modifier.fillMaxWidth()
                         .padding(horizontal = 20.dp),
@@ -95,7 +94,7 @@ fun Won(nav: NavHostController, modifier: Modifier = Modifier) {
                     )
                 ) {
                     Text(
-                        "Next level",
+                        "Go home!",
                         fontSize = 16.sp
                     )
                 }
