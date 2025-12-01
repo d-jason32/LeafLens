@@ -21,10 +21,15 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import com.example.android_development_capstone.game.Congrats1_2
 import com.example.android_development_capstone.game.Congrats2_3
+import com.example.android_development_capstone.game.Congrats4_5
+import com.example.android_development_capstone.game.Congrats5_6
 import com.example.android_development_capstone.game.Won
 import com.example.android_development_capstone.game.Game1
 import com.example.android_development_capstone.game.Game2
 import com.example.android_development_capstone.game.Game3
+import com.example.android_development_capstone.game.Game4
+import com.example.android_development_capstone.game.Game5
+import com.example.android_development_capstone.game.Game6
 import com.example.android_development_capstone.subject.SubjectScreen
 import com.example.android_development_capstone.question.QuestionScreen
 import com.example.android_development_capstone.question.AddQuestionScreen
@@ -152,9 +157,31 @@ fun MyApp(modifier: Modifier = Modifier, startDestination: String) {
                 )
             }
 
+            composable("Game4") {
+                Game4(
+                    onWin = { nav.navigate("Congrats4_5") }
+                )
+            }
+
+            composable("Game5") {
+                Game5(
+                    onWin = { nav.navigate("Congrats5_6") }
+                )
+            }
+
+            composable("Game6") {
+                Game6(
+                    onWin = { nav.navigate("won") }
+                )
+            }
+
             composable("Congrats1_2") { Congrats1_2(nav) }
 
             composable("Congrats2_3") { Congrats2_3(nav) }
+            
+            composable("Congrats4_5") { Congrats4_5(nav) }
+            
+            composable("Congrats5_6") { Congrats5_6(nav) }
             
             composable("won") { Won(nav) }
 
