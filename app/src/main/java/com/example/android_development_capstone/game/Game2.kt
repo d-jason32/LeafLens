@@ -58,7 +58,8 @@ import com.example.android_development_capstone.R
 
 
 @Composable
-fun Game1(modifier: Modifier = Modifier, onWin: () -> Unit = {}) {
+fun Game2(modifier: Modifier = Modifier, onWin: () -> Unit = {}) {
+    // Lock to landscape mode
     val context = LocalContext.current
     DisposableEffect(Unit) {
         val activity = context as? Activity
@@ -67,22 +68,26 @@ fun Game1(modifier: Modifier = Modifier, onWin: () -> Unit = {}) {
             activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
         }
     }
-    
+
     val coroutineScope = rememberCoroutineScope()
+
+    // Track the sequence of arrow commands
     val commands = remember { mutableStateListOf<String>() }
-    var plantRow by remember { mutableIntStateOf(4) }
+
+    // Plant position on the 5x5 grid (0-4 for both row and col)
+    var plantRow by remember { mutableIntStateOf(0) }  // Start at bottom-right
     var plantCol by remember { mutableIntStateOf(0) }
-    
-    // Finish line position
-    val finishRow = 0
-    val finishCol = 4
-    
+
+    // Finish line position (top-left corner)
+    val finishRow = 4
+    val finishCol = 0
+
     // Is the animation running?
     var isRunning by remember { mutableStateOf(false) }
-    
+
     // Grid cell size
     val cellSize = 50.dp
-    
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -97,7 +102,7 @@ fun Game1(modifier: Modifier = Modifier, onWin: () -> Unit = {}) {
             color = MaterialTheme.colorScheme.onPrimary,
             modifier = Modifier.padding(top = 8.dp, bottom = 4.dp)
         )
-        
+
         Box(
             modifier = Modifier
                 .fillMaxWidth()
@@ -149,7 +154,7 @@ fun Game1(modifier: Modifier = Modifier, onWin: () -> Unit = {}) {
                         )
                     }
                 }
-                
+
                 // Show placeholder if empty
                 if (commands.isEmpty()) {
                     Text(
@@ -160,9 +165,9 @@ fun Game1(modifier: Modifier = Modifier, onWin: () -> Unit = {}) {
                 }
             }
         }
-        
+
         Spacer(modifier = Modifier.height(12.dp))
-        
+
         // Grid and controls side by side
         Row(
             modifier = Modifier
@@ -188,9 +193,9 @@ fun Game1(modifier: Modifier = Modifier, onWin: () -> Unit = {}) {
                                         .size(cellSize)
                                         .border(1.dp, MaterialTheme.colorScheme.outline)
                                         .background(
-                                            if ((row + col) % 2 == 0) 
-                                                MaterialTheme.colorScheme.surface 
-                                            else 
+                                            if ((row + col) % 2 == 0)
+                                                MaterialTheme.colorScheme.surface
+                                            else
                                                 MaterialTheme.colorScheme.surfaceVariant
                                         )
                                 )
@@ -198,7 +203,7 @@ fun Game1(modifier: Modifier = Modifier, onWin: () -> Unit = {}) {
                         }
                     }
                 }
-                
+
                 // Finish line image (top-right corner)
                 Image(
                     painter = painterResource(id = R.drawable.finish),
@@ -208,7 +213,7 @@ fun Game1(modifier: Modifier = Modifier, onWin: () -> Unit = {}) {
                         .size(cellSize)
                         .padding(2.dp)
                 )
-                
+
                 // Animated plant position
                 val animatedOffsetX by animateDpAsState(
                     targetValue = cellSize * plantCol,
@@ -220,7 +225,7 @@ fun Game1(modifier: Modifier = Modifier, onWin: () -> Unit = {}) {
                     animationSpec = tween(300),
                     label = "plantY"
                 )
-                
+
                 // Plant image
                 Image(
                     painter = painterResource(id = R.drawable.plant),
@@ -231,7 +236,7 @@ fun Game1(modifier: Modifier = Modifier, onWin: () -> Unit = {}) {
                         .padding(4.dp)
                 )
             }
-            
+
             // Right side: arrows and buttons
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
@@ -242,7 +247,7 @@ fun Game1(modifier: Modifier = Modifier, onWin: () -> Unit = {}) {
                     text = "Drag arrows:",
                     color = MaterialTheme.colorScheme.onPrimary
                 )
-                
+
                 Row(
                     horizontalArrangement = Arrangement.spacedBy(8.dp),
                     verticalAlignment = Alignment.CenterVertically
@@ -259,7 +264,7 @@ fun Game1(modifier: Modifier = Modifier, onWin: () -> Unit = {}) {
                                 )
                             }
                     )
-                    
+
                     Column(horizontalAlignment = Alignment.CenterHorizontally) {
                         Icon(
                             imageVector = Icons.Filled.KeyboardArrowUp,
@@ -286,7 +291,7 @@ fun Game1(modifier: Modifier = Modifier, onWin: () -> Unit = {}) {
                                 }
                         )
                     }
-                    
+
                     Icon(
                         imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight,
                         contentDescription = "Right",
@@ -300,7 +305,7 @@ fun Game1(modifier: Modifier = Modifier, onWin: () -> Unit = {}) {
                             }
                     )
                 }
-                
+
                 // Control buttons
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
@@ -320,23 +325,23 @@ fun Game1(modifier: Modifier = Modifier, onWin: () -> Unit = {}) {
                                         "down" -> if (plantRow < 4) plantRow++
                                     }
                                     delay(500) // Wait for animation
-                                    
-                                        // Check if player reached the finish
-                                        if (plantRow == finishRow && plantCol == finishCol) {
-                                            delay(300) // Brief pause before navigating
-                                            onWin()
-                                            break
-                                        }
+
+                                    // Check if player reached the finish
+                                    if (plantRow == finishRow && plantCol == finishCol) {
+                                        delay(300) // Brief pause before navigating
+                                        onWin()
+                                        break
+                                    }
                                 }
                                 isRunning = false
                             }
                         }
                     )
-                    
+
                     ResetButton(
                         onReset = {
-                            plantRow = 4  // Reset to bottom-left
-                            plantCol = 0
+                            plantRow = 4  // Reset to bottom-right (starting position)
+                            plantCol = 4
                             commands.clear()
                         }
                     )
@@ -346,92 +351,3 @@ fun Game1(modifier: Modifier = Modifier, onWin: () -> Unit = {}) {
     }
 }
 
-@Composable
-fun ResetButton(onReset: () -> Unit) {
-    Button(
-        onClick = onReset,
-        colors = ButtonDefaults.buttonColors(
-            containerColor = MaterialTheme.colorScheme.secondaryContainer,
-            contentColor = MaterialTheme.colorScheme.onSecondaryContainer
-        )
-    ) {
-        Text("Reset")
-    }
-}
-
-@Composable
-fun StartButton(enabled: Boolean = true, onClick: () -> Unit) {
-    Button(
-        onClick = onClick,
-        enabled = enabled,
-        colors = ButtonDefaults.buttonColors(
-            containerColor = MaterialTheme.colorScheme.primaryContainer,
-            contentColor = MaterialTheme.colorScheme.onPrimaryContainer
-        )
-    ) {
-        Text("Start")
-    }
-}
-
-fun getArrowIcon(direction: String): ImageVector? {
-    return when (direction) {
-        "left" -> Icons.AutoMirrored.Filled.KeyboardArrowLeft
-        "right" -> Icons.AutoMirrored.Filled.KeyboardArrowRight
-        "up" -> Icons.Filled.KeyboardArrowUp
-        "down" -> Icons.Filled.KeyboardArrowDown
-        else -> null
-    }
-}
-
-@Composable
-fun WinDialog(onGoHome: () -> Unit) {
-    Dialog(onDismissRequest = { }) {
-        Card(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
-            colors = CardDefaults.cardColors(
-                containerColor = MaterialTheme.colorScheme.primaryContainer
-            )
-        ) {
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(24.dp),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(16.dp)
-            ) {
-                Text(
-                    text = "🎉",
-                    fontSize = 48.sp
-                )
-                
-                Text(
-                    text = "Congratulations!",
-                    fontSize = 28.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.onPrimaryContainer
-                )
-                
-                Text(
-                    text = "You guided the plant to the finish!",
-                    fontSize = 16.sp,
-                    textAlign = TextAlign.Center,
-                    color = MaterialTheme.colorScheme.onPrimaryContainer
-                )
-                
-                Spacer(modifier = Modifier.height(8.dp))
-                
-                Button(
-                    onClick = onGoHome,
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = MaterialTheme.colorScheme.primary,
-                        contentColor = MaterialTheme.colorScheme.onPrimary
-                    )
-                ) {
-                    Text("Go Home", fontSize = 18.sp)
-                }
-            }
-        }
-    }
-}

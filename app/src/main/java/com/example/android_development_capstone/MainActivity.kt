@@ -19,7 +19,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
+import com.example.android_development_capstone.game.Congrats1_2
 import com.example.android_development_capstone.game.Game1
+import com.example.android_development_capstone.game.Game2
 import com.example.android_development_capstone.subject.SubjectScreen
 import com.example.android_development_capstone.question.QuestionScreen
 import com.example.android_development_capstone.question.AddQuestionScreen
@@ -129,7 +131,19 @@ fun MyApp(modifier: Modifier = Modifier, startDestination: String) {
 
             composable("game") { Game(nav) }
 
-            composable("Game1") { Game1() }
+            composable("Game1") { 
+                Game1(
+                    onWin = { nav.navigate("Congrats1_2") }
+                )
+            }
+
+            composable("Game2") {
+                Game2(
+                    onWin = { nav.navigate("Congrats1_2") }
+                )
+            }
+            
+            composable("Congrats1_2") { Congrats1_2(nav) }
 
 
             composable("subjectscreen") { 
