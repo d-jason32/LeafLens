@@ -35,7 +35,7 @@
 ## 📚 Table of Contents
 - [💬 Introduction](#-introduction)
 - [🚀 Features](#-features)
-- [▶️ Demo](#-demo)
+- [▶️ Pictures](#-pictures)
 - [🧰 Tech Stack](#-tech-stack)
 - [🛠️ Installation](#-installation)
 - [🧪 Usage](#-usage)
@@ -46,9 +46,19 @@
 ## 💬 Introduction
 
 ## 🚀 Features
-- Datastore
-## ▶️ Demo
-[Watch the Demo Here! ???Insert demo???](https://youtube.com)
+
+### Coding Game
+1. Create accounts using Firebase
+2. Two different levels: easy and hard.
+3. Each game has 4 commands: move up, move down, move left, move right.
+4. Audio playback
+5. Drag and drop
+6. Handling success and reattempt
+7. Creating sessions for the game players
+8. Using Files to register player progress in a file
+9. Third party API to show progress in a parent report
+10. Works on phone and tablets
+## ▶️ Pictures
 
 ## 🧰 Tech Stack
 
