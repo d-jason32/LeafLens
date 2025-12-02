@@ -32,13 +32,13 @@
 
 ## 🌿 Main Features
 
-Botany Study Guide – Learn plant anatomy, classification, and key concepts through a simplified, structured guide.
+### Botany Study Guide 
 
-Educational Plant Game – Interactive quizzes and plant-matching challenges to reinforce learning in a fun way.
+### Educational Plant Game 
 
-Real-Time AI Plant Tutor – Ask questions about plants and get instant, adaptive explanations powered by AI.
+### Real-Time AI Plant Tutor
 
-TensorFlow Lite Plant Identification – On-device machine learning that identifies plants in real time using a TFLite model.
+### TensorFlow Lite Plant Identification 
 
 
 ## 📚 Table of Contents
