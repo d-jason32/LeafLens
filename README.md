@@ -30,7 +30,7 @@
 ![License](https://img.shields.io/github/license/d-jason32/LeafLens)
 </div>
 
-🌿 Features
+## 🌿 Main Features
 
 Botany Study Guide – Learn plant anatomy, classification, and key concepts through a simplified, structured guide.
 
