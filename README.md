@@ -57,7 +57,7 @@
 ## 🚀 Features
 
 
-### Coding Game
+### Educational Plant Game
 1. Create accounts using Firebase
 2. Two different levels: easy and hard.
 3. Each game has 4 commands: move up, move down, move left, move right.
@@ -68,8 +68,29 @@
 8. Using Files to register player progress in a file
 9. Third party API to show progress in a parent report
 10. Works on phone and tablets
-## ▶️ Pictures
 
+[Watch Educational Plant Game Video](https://youtu.be/yourvideo)
+
+### Botany Study Guide
+
+### Educational Plant Game
+
+### Real-Time AI Plant Tutor
+
+### TensorFlow Lite Plant Identification
+
+## ▶️ Pictures
+### Educational Plant Game
+![img.png](img.png)
+![img_1.png](img_1.png)
+![img_2.png](img_2.png)
+![img_3.png](img_3.png)
+![img_4.png](img_4.png)
+![img_6.png](img_6.png)
+![img_7.png](img_7.png)
+![img_8.png](img_8.png)
+
+![img_5.png](img_5.png)
 ## 🧰 Tech Stack
 
 
