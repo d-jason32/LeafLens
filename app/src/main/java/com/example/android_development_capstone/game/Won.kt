@@ -20,6 +20,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -29,14 +30,22 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import com.example.android_development_capstone.BottomNavBar
 import com.example.android_development_capstone.NiceJob
 import com.example.android_development_capstone.PlantPicture
 import com.example.android_development_capstone.R
+import com.example.android_development_capstone.SoundManager
+import kotlinx.coroutines.delay
 
 @Composable
 fun Won(nav: NavHostController, modifier: Modifier = Modifier) {
+    LaunchedEffect(Unit) {
+        delay(1000)
+        SoundManager.play("wow")
+    }
+
     val context = LocalContext.current
     DisposableEffect(Unit) {
         val activity = context as? Activity
@@ -49,7 +58,6 @@ fun Won(nav: NavHostController, modifier: Modifier = Modifier) {
     Scaffold(
         containerColor = MaterialTheme.colorScheme.secondary,
         modifier = Modifier.fillMaxSize(),
-        bottomBar = { BottomNavBar(nav) },
 
 
         ) { paddingValues ->
@@ -83,7 +91,12 @@ fun Won(nav: NavHostController, modifier: Modifier = Modifier) {
 
                 OutlinedButton(
                     onClick = {
-                        nav.navigate("home")
+                        nav.navigate("home") {
+                            popUpTo(nav.graph.findStartDestination().id) {
+                                inclusive = true
+                            }
+                            launchSingleTop = true
+                        }
                     },
                     modifier = Modifier.fillMaxWidth()
                         .padding(horizontal = 20.dp),
