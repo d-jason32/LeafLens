@@ -81,17 +81,21 @@
 
 ## ▶️ Pictures
 ### Educational Plant Game
-![img.png](img.png)
-<img src="img.png" width="300">
-![img_1.png](img_1.png)
-![img_2.png](img_2.png)
-![img_3.png](img_3.png)
-![img_4.png](img_4.png)
-![img_6.png](img_6.png)
-![img_7.png](img_7.png)
-![img_8.png](img_8.png)
+<img src="readme_pics/img.png" width="300">
 
-![img_5.png](img_5.png)
+![img_1.png](readme_pics/img_1.png)
+
+<img src="readme_pics/img_2.png" width="300">
+
+![img_3.png](readme_pics/img_3.png)
+![img_4.png](readme_pics/img_4.png)
+![img_6.png](readme_pics/img_6.png)
+![img_7.png](readme_pics/img_7.png)
+![img_8.png](readme_pics/img_8.png)
+
+
+<img src="readme_pics/img_5.png" width="300">
+
 ## 🧰 Tech Stack
 
 
