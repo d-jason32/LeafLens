@@ -25,6 +25,9 @@ object SoundManager {
             .build()
 
         soundMap["choose"] = soundPool!!.load(context, R.raw.choose, 1)
+        soundMap["button"] = soundPool!!.load(context, R.raw.soundeffect, 1)
+        soundMap["wow"] = soundPool!!.load(context, R.raw.wow, 1)
+
 
 
 
