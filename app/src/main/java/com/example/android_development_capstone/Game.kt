@@ -30,6 +30,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import kotlinx.coroutines.delay
 
+// Screen where the user can choose the game level
 @Composable
 fun Game(nav: NavHostController, modifier: Modifier = Modifier) {
     LaunchedEffect(Unit) {

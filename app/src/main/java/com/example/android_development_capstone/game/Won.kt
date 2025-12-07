@@ -39,6 +39,7 @@ import com.example.android_development_capstone.R
 import com.example.android_development_capstone.SoundManager
 import kotlinx.coroutines.delay
 
+// Composable function for the "Won" screen
 @Composable
 fun Won(nav: NavHostController, modifier: Modifier = Modifier) {
     LaunchedEffect(Unit) {

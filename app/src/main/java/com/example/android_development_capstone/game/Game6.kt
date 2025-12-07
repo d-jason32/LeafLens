@@ -45,7 +45,7 @@ import androidx.compose.ui.res.painterResource
 import com.example.android_development_capstone.R
 import com.example.android_development_capstone.SoundManager
 
-
+// composable for game 6
 @Composable
 fun Game6(modifier: Modifier = Modifier, onWin: () -> Unit = {}) {
     val context = LocalContext.current
@@ -68,8 +68,6 @@ fun Game6(modifier: Modifier = Modifier, onWin: () -> Unit = {}) {
     val finishRow = 4
     val finishCol = 4
     
-    // Hardest maze - narrow winding path
-    // Path: (2,2)→(3,2)→(3,3)→(4,3)→(4,4)
     val barriers = listOf(
         Pair(1, 1),
         Pair(1, 2),

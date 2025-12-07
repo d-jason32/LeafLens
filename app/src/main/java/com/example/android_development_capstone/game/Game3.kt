@@ -63,7 +63,6 @@ fun Game3(modifier: Modifier = Modifier, onWin: () -> Unit = {}) {
     // Track the sequence of arrow commands
     val commands = remember { mutableStateListOf<String>() }
 
-    // Plant position on the 5x5 grid (0-4 for both row and col)
     var plantRow by remember { mutableIntStateOf(0) }  // Start at top-left
     var plantCol by remember { mutableIntStateOf(0) }
 
