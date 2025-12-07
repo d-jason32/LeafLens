@@ -134,8 +134,8 @@ fun Camera(nav: NavHostController, modifier: Modifier = Modifier) {
 }
 
 
+// Function to take the bitmap, convert to base64, send to OpenAI, and get response
 private suspend fun identifyPlant(bitmap: Bitmap): String = withContext(Dispatchers.IO) {
-    // Encode bitmap to Base64 (PNG)
     val pngStream = ByteArrayOutputStream()
     bitmap.compress(Bitmap.CompressFormat.PNG, 100, pngStream)
     val imageBytes = pngStream.toByteArray()
@@ -180,7 +180,6 @@ private suspend fun identifyPlant(bitmap: Bitmap): String = withContext(Dispatch
         throw IllegalStateException("OpenAI request failed ($responseCode): $responseText")
     }
 
-    // Parse minimal JSON for the assistant's message content
     val content = try {
         val json = JSONObject(responseText)
         json.getJSONArray("choices")

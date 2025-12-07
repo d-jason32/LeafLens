@@ -14,6 +14,7 @@ import androidx.compose.material.icons.outlined.Science
 import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material.icons.outlined.SportsEsports
+import androidx.compose.material.icons.outlined.Toys
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
@@ -37,10 +38,10 @@ import com.example.android_development_capstone.ui.theme.Surface
 
 @Composable
 fun BottomNavBar(navController: NavHostController) {
-    val items = listOf("home", "search", "camera", "subjectscreen", "game")
-    val icons = listOf(Icons.Outlined.Home, Icons.Outlined.Search, Icons.Outlined.Camera, Icons.Outlined.LocalFlorist, Icons.Outlined.SportsEsports)
+    val items = listOf("home", "animations", "camera", "subjectscreen", "game")
+    val icons = listOf(Icons.Outlined.Home, Icons.Outlined.Toys, Icons.Outlined.Camera, Icons.Outlined.LocalFlorist, Icons.Outlined.SportsEsports)
 
-    val routes = listOf("home", "", "camera", "subjectscreen", "game")
+    val routes = listOf("home", "animations", "camera", "subjectscreen", "game")
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
 

@@ -1,24 +1,19 @@
 package com.example.android_development_capstone
 
 import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.android_development_capstone.ui.theme.Android_Development_CapstoneTheme
 import android.os.Bundle
 import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
+import com.example.android_development_capstone.animations.Cards
 import com.example.android_development_capstone.game.Congrats1_2
 import com.example.android_development_capstone.game.Congrats2_3
 import com.example.android_development_capstone.game.Congrats4_5
@@ -46,7 +41,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         auth = Firebase.auth
         val currentUser = auth.currentUser
-        val startDestination = "splashscreen"
+        val startDestination = "home"
         SoundManager.init(this)
 
         setContent {
@@ -188,6 +183,9 @@ fun MyApp(modifier: Modifier = Modifier, startDestination: String) {
             composable("camera") { Camera(nav) }
 
             composable("cameraresponse") { CameraResponse(nav) }
+
+            composable("animations") { Cards(nav) }
+
 
 
 
