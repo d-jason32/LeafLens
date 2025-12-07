@@ -22,6 +22,10 @@
 
 <div align="center">
 
+<p align="center">
+  <img src="readme_pics/cards_gif.gif" width="300"/>
+</p>
+
 ![GitHub repo size](https://img.shields.io/github/repo-size/d-jason32/LeafLens)
 ![GitHub stars](https://img.shields.io/github/stars/d-jason32/LeafLens)
 ![GitHub issues](https://img.shields.io/github/issues/d-jason32/LeafLens)
@@ -105,7 +109,9 @@
 <img src="readme_pics/apiresponse.png" width="300">
 
 ### Plant Trading Cards with Animations
-![Demo](readme_pics/cards_gif.gif)
+<p align="center">
+  <img src="readme_pics/cards_gif.gif" width="300"/>
+</p>
 
 
 ## 🧰 Tech Stack
