@@ -139,15 +139,31 @@ LeafLens is an innovative mobile application designed to educate users about bot
 <img src="readme_pics/study3.png" width="300">
 
 ## 🧰 Tech Stack
+1. Android Studio
+2. Kotlin
+3. JetPack Compose
+4. Firebase Authentication
+6. OpenAI API (ChatGPT 4o Vision model)
+7. CameraX API
+8. HTTP Client (OkHttp)
+9. Animation Libraries
 
 
 ## 🛠️ Installation
-
-## 🧪 Usage
-
-## 📁 Project Structure
+1. Clone the repository
+2. Open the project in Android Studio.
+3. Firebase Private Key included
+4. Set up OpenAI API key in the project.
+5. Build and run the application on an Android device or emulator.
+6. Enjoy learning about botany with LeafLens!
 
 ## ❓FAQ
+1. **What platforms does LeafLens support?**
+   - LeafLens is currently available for Android devices.
+2. **Is there a cost to use LeafLens?**
+   - LeafLens is free to download and use.
+3. **Is user data secure?**
+   - Yes, LeafLens uses Firebase Authentication to ensure user data is securely managed.
 
 ## 📄Documentation
 [View the Documentation ???Insert Documentation](https://google.com)
