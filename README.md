@@ -99,6 +99,11 @@
 
 <img src="readme_pics/img_5.png" width="300">
 
+### OpenAI Plant Identifier
+<img src="readme_pics/camerascreen.png" width="300">
+<img src="readme_pics/plantpic.png" width="300">
+<img src="readme_pics/apiresponse.png" width="300">
+
 ## 🧰 Tech Stack
 
 

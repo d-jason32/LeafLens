@@ -185,6 +185,11 @@ fun MyApp(modifier: Modifier = Modifier, startDestination: String) {
             
             composable("won") { Won(nav) }
 
+            composable("camera") { Camera(nav) }
+
+            composable("cameraresponse") { CameraResponse(nav) }
+
+
 
 
 
