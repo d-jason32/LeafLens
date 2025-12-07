@@ -40,6 +40,8 @@
 
 ### Real-Time AI Plant Tutor
 
+### Trading Cards with Animations
+
 
 
 ## 📚 Table of Contents
@@ -54,6 +56,8 @@
 - [🙏 Acknowledgments](#-acknowledgments)
 
 ## 💬 Introduction
+
+LeafLens is an innovative mobile application designed to educate users about botany through interactive features. The app includes an educational plant game, a comprehensive botany study guide, a real-time AI plant tutor, and animated trading cards. It was built using Kotlin and JetPack Compose for the frontend, Firebase for authentication and database management, and OpenAI's API for AI functionalities.
 
 ## 🚀 Features
 
@@ -72,10 +76,23 @@
 [Watch Educational Plant Game Video](https://youtu.be/wsfKHGA955Q)
 
 ### Botany Study Guide
+1. Click into different sections to learn about botany
+2. Learn about gardening tips
+3. Horticulture
+4. Plant Anatomy
+5. Plant Chemistry
+6. Plant History 
+7. Plant Physiology
 
 ### Real-Time AI Plant Tutor
+1. Take pictures of plants using the camera 
+2. Image gets sent to OpenAI's API using the ChatGPT 4o Vision model
+3. Receive detailed information about the plant in real-time including the plant's name, species, and care instructions.
 
-### TensorFlow Lite Plant Identification
+### Trading Cards with Animations
+1. Collect trading cards of different plants
+2. Each card has unique animations
+
 
 ## ▶️ Pictures
 ### Splash Screen/ Login / Register with Firebase
